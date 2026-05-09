@@ -1,5 +1,5 @@
 {
-  "originHash" : "0d7704f325ef3363ed2fa6da12e76d371672037d8e3e3573638f20572847679f",
+  "originHash" : "bb26c2e7e5aa042f4f38135c89e126feb59310a242c933545ee69174b5996667",
   "pins" : [
     {
       "identity" : "manim-agentic-interface",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/qdouble/Manim-Agentic-Interface.git",
       "state" : {
         "branch" : "codex/tts-mai-v0.2-patch",
-        "revision" : "0fc33f7a44f114c4341754053a5c3a08bbc08839"
+        "revision" : "6531279528aa23676609522408c19c35c7cc34b2"
       }
     },
     {

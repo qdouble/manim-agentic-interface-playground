@@ -14,8 +14,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // W1 scaffold dependency. W3/final closeout updates this to the proved
-        // MAI v0.2 remote tag after setup/render proof exists.
+        // Pre-release dependency for v0.2 patch proof. Final closeout updates
+        // this to the proved MAI v0.2 remote tag.
         .package(
             url: "https://github.com/qdouble/Manim-Agentic-Interface.git",
             branch: "codex/tts-mai-v0.2-patch"
@@ -30,7 +30,7 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "SetupShellLockTests",
+            name: "SetupShellTests",
             dependencies: []
         ),
     ],

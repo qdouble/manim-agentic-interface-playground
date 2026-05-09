@@ -4,14 +4,37 @@ set -euo pipefail
 CANONICAL_VENV="$HOME/Library/Application Support/manim-agentic-interface/venv"
 TTS_MODELS_DIR="$HOME/Library/Application Support/text-to-speech-interface/models"
 
-if ! command -v python3 >/dev/null 2>&1; then
-    echo "ERROR: python3 not found on PATH. Install Python 3.11+ from"
+PYTHON_BIN=""
+PY_VERSION=""
+for cand in python3 python3.14 python3.13 python3.12 python3.11; do
+    if command -v "$cand" >/dev/null 2>&1; then
+        CAND_VERSION="$("$cand" -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+        CAND_MAJOR="$(echo "$CAND_VERSION" | cut -d. -f1)"
+        CAND_MINOR="$(echo "$CAND_VERSION" | cut -d. -f2)"
+        if [[ "$CAND_MAJOR" -eq 3 ]] && [[ "$CAND_MINOR" -ge 11 ]]; then
+            PYTHON_BIN="$cand"
+            PY_VERSION="$CAND_VERSION"
+            break
+        fi
+        if [[ -z "$PY_VERSION" ]]; then
+            PY_VERSION="$CAND_VERSION"
+        fi
+    fi
+done
+
+if [[ -z "$PYTHON_BIN" ]]; then
+    if [[ -z "$PY_VERSION" ]]; then
+        echo "ERROR: python3 not found on PATH. Install Python 3.11+ from"
+    else
+        echo "ERROR: Python $PY_VERSION found; v0.2 requires Python 3.11+."
+        echo "       Install Python 3.11+ from https://www.python.org/downloads/."
+        exit 1
+    fi
     echo "       https://www.python.org/downloads/ or via Homebrew:"
     echo "       brew install python@3.13"
     exit 1
 fi
 
-PY_VERSION="$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
 PY_MAJOR="$(echo "$PY_VERSION" | cut -d. -f1)"
 PY_MINOR="$(echo "$PY_VERSION" | cut -d. -f2)"
 if [[ "$PY_MAJOR" -ne 3 ]] || [[ "$PY_MINOR" -lt 11 ]]; then
@@ -23,13 +46,13 @@ fi
 MANIM_VERSION="$(
     swift run --quiet --skip-build manim-agentic-interface pinned-manim-version 2>/dev/null \
         | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' \
-        | tail -1
+        | tail -1 || true
 )"
 if [[ -z "$MANIM_VERSION" ]]; then
     MANIM_VERSION="$(
         swift run --quiet manim-agentic-interface pinned-manim-version 2>/dev/null \
             | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' \
-            | tail -1
+            | tail -1 || true
     )"
 fi
 if [[ -z "$MANIM_VERSION" ]]; then
@@ -56,7 +79,7 @@ done
 trap 'rmdir "$LOCK_DIR" 2>/dev/null || true' EXIT
 
 if [[ ! -d "$CANONICAL_VENV" ]]; then
-    python3 -m venv "$CANONICAL_VENV"
+    "$PYTHON_BIN" -m venv "$CANONICAL_VENV"
     "$CANONICAL_VENV/bin/pip" install --upgrade pip
     "$CANONICAL_VENV/bin/pip" install "manim==$MANIM_VERSION"
 fi

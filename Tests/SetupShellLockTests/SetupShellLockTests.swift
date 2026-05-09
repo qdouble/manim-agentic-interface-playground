@@ -28,8 +28,16 @@ import Testing
     ))
     #expect(script.contains("swift run --quiet manim-agentic-interface pinned-manim-version"))
     #expect(script.contains(#"grep -oE '[0-9]+\.[0-9]+\.[0-9]+'"#))
-    #expect(script.contains("tail -1"))
+    #expect(script.contains("tail -1 || true"))
     #expect(script.contains("failed to read the pinned manim version"))
+}
+
+@Test func setupScriptCanUseVersionedPythonWhenPython3IsTooOld() throws {
+    let script = try setupScriptText()
+
+    #expect(script.contains("for cand in python3 python3.14 python3.13 python3.12 python3.11; do"))
+    #expect(script.contains(#"PYTHON_BIN="$cand""#))
+    #expect(script.contains(#""$PYTHON_BIN" -m venv "$CANONICAL_VENV""#))
 }
 
 @Test func setupScriptWiresTTSInstallAndSkillPointer() throws {

@@ -26,6 +26,7 @@ let package = Package(
             name: "MinimalScene",
             dependencies: [
                 .product(name: "ManimAgenticInterface", package: "manim-agentic-interface"),
+                .product(name: "ManimAgenticInterfaceTTS", package: "manim-agentic-interface"),
             ]
         ),
         .testTarget(

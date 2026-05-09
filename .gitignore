@@ -1,0 +1,21 @@
+.DS_Store
+.build/
+.swiftpm/
+.venv/
+.vendor/
+DerivedData/
+
+# Local environment / credentials.
+.env
+.env.*
+*.pem
+*.key
+
+# setup.sh-generated agent skill outputs. Source truth remains in MAI/global skills.
+.claude/skills/
+.codex/skills/
+
+# Local render / feedback outputs.
+renders/
+outputs/
+feedback/

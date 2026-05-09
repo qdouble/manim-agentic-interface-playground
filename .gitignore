@@ -15,6 +15,14 @@ DerivedData/
 .claude/skills/
 .codex/skills/
 
+# Provider-local plan/audit/session state.
+.codex/plans/
+.codex/audits/
+.claude-plans/
+.claude/plans/
+.claude/audits/
+next-session-directions.md
+
 # Local render / feedback outputs.
 renders/
 outputs/

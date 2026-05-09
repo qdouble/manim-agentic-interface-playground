@@ -28,6 +28,10 @@ let package = Package(
                 .product(name: "ManimAgenticInterface", package: "manim-agentic-interface"),
             ]
         ),
+        .testTarget(
+            name: "SetupShellLockTests",
+            dependencies: []
+        ),
     ],
     swiftLanguageModes: [.v6]
 )

@@ -1,13 +1,13 @@
 {
-  "originHash" : "e6a10a62cb6a86df72142c73f8b33a5c1ee2d4a04099afa3a9981309ef66e01c",
+  "originHash" : "1e1af5bb37167b459cd80f080e7d2efb7886ba34e65a06fc10a393b87208f392",
   "pins" : [
     {
       "identity" : "manim-agentic-interface",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/qdouble/Manim-Agentic-Interface.git",
       "state" : {
-        "branch" : "codex/tts-mai-v0.2-patch",
-        "revision" : "5fd7a6e8baab6f1bb8b1442a190c8aaf77dff8a0"
+        "branch" : "main",
+        "revision" : "39bf29713cf155a47d973f3b4862975e74ad1588"
       }
     },
     {

@@ -6,7 +6,6 @@ import ManimAgenticInterfaceTTS
 @main
 struct MinimalScene {
     static func main() async throws {
-        let outputRoot = URL(fileURLWithPath: ".build/manim-renders/minimal-scene", isDirectory: true)
         let title = TimelineDSL.textNode(
             id: NodeID("title"),
             text: NonEmptyText("MAI v0.2 setup proof"),
@@ -15,7 +14,7 @@ struct MinimalScene {
             style: TimelineDSL.style(fill: HexColor("#FFFFFF"), opacity: UnitInterval(1))
         )
         let builder = ManimTTSNarrationBuilder()
-        let narration = try await builder.synthAndCue(
+        let narration = try await builder.voiceOver(
             text: "This is the first pre-release MAI v0.2 playground render proof.",
             sceneRelativeStart: 0.1
         )
@@ -33,25 +32,22 @@ struct MinimalScene {
         let document = TimelineDSL.document(
             rendererSettings: TimelineDSL.rendererSettings(
                 canvas: TimelineDSL.canvas(width: 1280, height: 720),
-                backgroundColor: HexColor("#101820"),
-                framesPerSecond: 24,
-                quality: .draft,
-                enabledCapabilities: [.staticTimeline, .text, .narrationMetadata, .audioMuxing],
-                allowedOpcodes: [.createText, .animateFade, .attachNarrationCue, .attachAudioCue]
+                backgroundColor: "#0F172A"
             ),
             audioAssets: [narration.audioAsset],
             scenes: [scene]
         )
-        let envelope = await PipelineRenderer().render(document: document, outputRoot: outputRoot)
-        if let success = envelope.success {
-            print("Rendered pre-release MAI v0.2 playground proof: \(success.artifactPath)")
-        } else {
-            let failure = envelope.failure
-            fputs("Render failed: \(failure?.stableCode ?? "unknown") \(failure?.message ?? "")\n", stderr)
-            if let detail = failure?.detail {
-                fputs("\(detail)\n", stderr)
-            }
+        let envelope = await PipelineRenderer.render(document: document)
+        if case .failure = envelope.status, let failure = envelope.failure {
+            fputs("Render failed: \(failure.stableCode) \(failure.message)\n", stderr)
+            if let hint = failure.actionableHint { fputs("  → \(hint)\n", stderr) }
+            if let detail = failure.detail { fputs("\(detail)\n", stderr) }
             Darwin.exit(Int32(envelope.exitCode.rawValue))
         }
+        guard let success = envelope.success else {
+            fputs("Render finished without success artifact.\n", stderr)
+            Darwin.exit(1)
+        }
+        print("Rendered MP4: \(success.artifactPath)")
     }
 }

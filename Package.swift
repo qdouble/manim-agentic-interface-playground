@@ -14,11 +14,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // Pre-release dependency for v0.2 patch proof. Final closeout updates
-        // this to the proved MAI v0.2 remote tag.
+        // MAI dependency on main branch. Update to a tagged release
+        // (e.g., from: "0.3.0") once the next stable release is cut.
         .package(
             url: "https://github.com/qdouble/Manim-Agentic-Interface.git",
-            branch: "codex/tts-mai-v0.2-patch"
+            branch: "main"
         ),
     ],
     targets: [

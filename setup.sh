@@ -40,8 +40,9 @@ fi
 
 swift run --quiet manim-agentic-interface dump-skills --dest .claude/skills --provider claude
 swift run --quiet manim-agentic-interface dump-skills --dest .codex/skills --provider codex
+swift run --quiet manim-agentic-interface dump-skills --dest .gemini/skills --provider gemini
 
-for provider_dir in .claude/skills .codex/skills; do
+for provider_dir in .claude/skills .codex/skills .gemini/skills; do
     mkdir -p "$provider_dir/text-to-speech-interface-consumer"
     cat > "$provider_dir/text-to-speech-interface-consumer/SKILL.md" <<'EOF'
 ---

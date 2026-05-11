@@ -14,6 +14,7 @@ DerivedData/
 # setup.sh-generated agent skill outputs. Source truth remains in MAI/global skills.
 .claude/skills/
 .codex/skills/
+.gemini/skills/
 
 # Provider-local plan/audit/session state.
 .codex/plans/

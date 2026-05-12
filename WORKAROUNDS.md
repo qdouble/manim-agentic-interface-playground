@@ -14,6 +14,6 @@ Keep entries factual and remove them once MAI fixes the underlying issue.
 - Why this should not become permanent:
 ```
 
-Setup/render proof now belongs to the checked-in pre-release playground route.
-Record only temporary consumer-side workarounds that remain after running
-`./setup.sh` and the minimal scene.
+Setup/render proof now belongs to the checked-in playground route. Record only
+temporary consumer-side workarounds that remain after running `./setup.sh` and
+the minimal scene.

@@ -14,11 +14,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // MAI dependency on main branch. Update to a tagged release
-        // (e.g., from: "0.3.0") once the next stable release is cut.
+        // Wave 8 pre-merge MAI dependency proof branch. Return to main or a
+        // tagged release after spatial-storyboard-layout merges.
         .package(
             url: "https://github.com/qdouble/Manim-Agentic-Interface.git",
-            branch: "main"
+            branch: "codex/spatial-storyboard-layout"
         ),
     ],
     targets: [

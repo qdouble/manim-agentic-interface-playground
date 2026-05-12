@@ -12,7 +12,7 @@ import Testing
     #expect(!script.contains("pinned-manim-version"))
 }
 
-@Test func setupScriptWiresTTSInstallAndSkillPointer() throws {
+@Test func setupScriptWiresTTSInstallAndProviderSkillPointers() throws {
     let script = try setupScriptText()
 
     #expect(script.contains(#""$HOME/Library/Application Support/text-to-speech-interface/models""#))
@@ -22,6 +22,8 @@ import Testing
     #expect(script.contains("swift run --quiet tts-interface install kokoro"))
     #expect(script.contains("swift run --quiet manim-agentic-interface dump-skills --dest .claude/skills --provider claude"))
     #expect(script.contains("swift run --quiet manim-agentic-interface dump-skills --dest .codex/skills --provider codex"))
+    #expect(script.contains("swift run --quiet manim-agentic-interface dump-skills --dest .gemini/skills --provider gemini"))
+    #expect(script.contains("for provider_dir in .claude/skills .codex/skills .gemini/skills"))
     #expect(script.contains("text-to-speech-interface-consumer/SKILL.md"))
     #expect(script.contains("Text-to-Speech Interface Consumer (playground pointer)"))
 }

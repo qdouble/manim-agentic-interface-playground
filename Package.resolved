@@ -1,13 +1,13 @@
 {
-  "originHash" : "1e1af5bb37167b459cd80f080e7d2efb7886ba34e65a06fc10a393b87208f392",
+  "originHash" : "1ac6c989b2ca052c27852882359d84b89e073c272ce6b96598532abd2e87d518",
   "pins" : [
     {
       "identity" : "manim-agentic-interface",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/qdouble/Manim-Agentic-Interface.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "39bf29713cf155a47d973f3b4862975e74ad1588"
+        "branch" : "codex/spatial-storyboard-layout",
+        "revision" : "00172ffd05b2812c40256748aa70623d844fb54d"
       }
     },
     {

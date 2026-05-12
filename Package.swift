@@ -18,7 +18,7 @@ let package = Package(
         // (e.g., from: "0.3.0") once the next stable release is cut.
         .package(
             url: "https://github.com/qdouble/Manim-Agentic-Interface.git",
-            branch: "main"
+            branch: "codex/spatial-storyboard-layout"
         ),
     ],
     targets: [
